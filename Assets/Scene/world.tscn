@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b5mim7gvtlh73" path="res://Assets/Sprites/icon.svg" id="3_rfrvd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_falot"]
+size = Vector2(10.4, 14)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ckic1"]
 atlas = ExtResource("2_cr78j")
@@ -88,19 +89,22 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6yglq"]
-size = Vector2(674, 91)
+size = Vector2(569, 91)
 
 [node name="Node2D" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(487, 353)
+position = Vector2(429, 417)
 scale = Vector2(5, 5)
 script = ExtResource("1_kq4p8")
+speed = 200
 jumpForce = 250
 jumpHeight = 250
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-0.199997, 0.399994)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_falot")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
@@ -108,17 +112,30 @@ sprite_frames = SubResource("SpriteFrames_vdxu0")
 animation = &"Jump"
 frame_progress = 0.273516
 
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+zoom = Vector2(1.5, 1.5)
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 z_index = -1
-position = Vector2(322, 510)
+position = Vector2(378, 512)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(320.5, -40.5)
-scale = Vector2(5.35156, 0.773438)
+position = Vector2(84, 0)
+scale = Vector2(1.48438, 0.773438)
 texture = ExtResource("3_rfrvd")
-metadata/_edit_group_ = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(272, 0)
+scale = Vector2(1.48438, 0.773438)
+texture = ExtResource("3_rfrvd")
+
+[node name="Sprite2D3" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(461, 0)
+scale = Vector2(1.48438, 0.773438)
+texture = ExtResource("3_rfrvd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(325, -43)
+position = Vector2(270.5, 0)
 shape = SubResource("RectangleShape2D_6yglq")
