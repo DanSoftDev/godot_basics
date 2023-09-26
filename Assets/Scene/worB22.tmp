@@ -6,6 +6,10 @@
 [ext_resource type="Script" path="res://Assets/Scripts/Enemy.gd" id="4_eo025"]
 [ext_resource type="Texture2D" uid="uid://bi55egfe4f87c" path="res://Assets/Sprites/demon.png" id="5_fcaet"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6wjd4"]
+radius = 4.99999
+height = 15.2
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ckic1"]
 atlas = ExtResource("2_cr78j")
 region = Rect2(0, 0, 16, 16)
@@ -87,15 +91,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u3v3o"]
-radius = 4.6
-height = 16.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6yglq"]
+size = Vector2(569, 91)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ijj3"]
-size = Vector2(54, 20)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m670h"]
-height = 24.6667
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iiei6"]
+radius = 8.33334
+height = 28.6667
 
 [node name="Node2D" type="Node2D"]
 
@@ -107,6 +108,10 @@ speed = 200
 jumpHeight = 150
 metadata/_edit_group_ = true
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(-0.199997, 0.399994)
+shape = SubResource("CapsuleShape2D_6wjd4")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
 sprite_frames = SubResource("SpriteFrames_vdxu0")
 animation = &"Jump"
@@ -116,41 +121,38 @@ frame_progress = 0.273516
 scale = Vector2(0.5, 0.5)
 zoom = Vector2(1.5, 1.5)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource("CapsuleShape2D_u3v3o")
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(432, 557)
+z_index = -1
+position = Vector2(378, 512)
 
-[node name="Icon" type="Sprite2D" parent="StaticBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(84, 0)
+scale = Vector2(1.48438, 0.773438)
 texture = ExtResource("3_rfrvd")
 
-[node name="Icon2" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(105, -1)
+[node name="Sprite2D2" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(272, 0)
+scale = Vector2(1.48438, 0.773438)
 texture = ExtResource("3_rfrvd")
 
-[node name="Icon3" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(202, -1)
+[node name="Sprite2D3" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(461, 0)
+scale = Vector2(1.48438, 0.773438)
 texture = ExtResource("3_rfrvd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(102, 0)
-scale = Vector2(6, 6)
-shape = SubResource("RectangleShape2D_7ijj3")
+position = Vector2(269, -1)
+shape = SubResource("RectangleShape2D_6yglq")
 
 [node name="Enemy" type="Area2D" parent="." groups=["Enemy"]]
-position = Vector2(639, 450)
+position = Vector2(666, 363)
+scale = Vector2(0.5, 0.5)
 script = ExtResource("4_eo025")
-metadata/_edit_group_ = true
 
 [node name="Demon" type="Sprite2D" parent="Enemy"]
-scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_fcaet")
-flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
-position = Vector2(-6, 9)
-scale = Vector2(3, 3)
-shape = SubResource("CapsuleShape2D_m670h")
-
-[connection signal="body_entered" from="Enemy" to="Enemy" method="_on_body_entered"]
+position = Vector2(6, 6)
+scale = Vector2(6, 6)
+shape = SubResource("CapsuleShape2D_iiei6")

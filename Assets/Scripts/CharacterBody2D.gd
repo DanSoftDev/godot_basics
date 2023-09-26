@@ -43,3 +43,4 @@ func _physics_process(delta):
 		onGround = true
 		
 	move_and_slide()
+	
