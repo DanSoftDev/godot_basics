@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dprvhd8le0c3n"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Enemy.gd" id="1_dkoea"]
+[ext_resource type="Texture2D" uid="uid://bi55egfe4f87c" path="res://Assets/Sprites/demon.png" id="2_x2eq8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m670h"]
+height = 24.6667
+
+[node name="Enemy" type="Area2D" groups=["Enemy"]]
+visible = false
+position = Vector2(639, 450)
+script = ExtResource("1_dkoea")
+metadata/_edit_group_ = true
+
+[node name="Demon" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_x2eq8")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-6, 9)
+scale = Vector2(3, 3)
+shape = SubResource("CapsuleShape2D_m670h")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

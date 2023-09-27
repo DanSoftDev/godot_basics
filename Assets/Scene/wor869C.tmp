@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://d3qh4hbtfjxkp"]
+[gd_scene load_steps=21 format=3 uid="uid://d3qh4hbtfjxkp"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/CharacterBody2D.gd" id="1_kq4p8"]
 [ext_resource type="Texture2D" uid="uid://bd814433q08fv" path="res://Assets/Sprites/zarca sprite.png" id="2_cr78j"]
 [ext_resource type="Texture2D" uid="uid://b5mim7gvtlh73" path="res://Assets/Sprites/icon.svg" id="3_rfrvd"]
+[ext_resource type="Script" path="res://Assets/Scripts/Enemy.gd" id="4_eo025"]
 [ext_resource type="Texture2D" uid="uid://bi55egfe4f87c" path="res://Assets/Sprites/demon.png" id="5_fcaet"]
 [ext_resource type="Script" path="res://Assets/Scripts/Enemy2.gd" id="6_lwdte"]
 
@@ -91,11 +92,11 @@ animations = [{
 radius = 4.6
 height = 16.0
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jrcb6"]
-blend_mode = 1
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ijj3"]
-size = Vector2(89.3333, 20)
+size = Vector2(54, 20)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m670h"]
+height = 24.6667
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qbu8e"]
 radius = 11.3333
@@ -106,8 +107,6 @@ height = 27.3333
 [node name="Player" type="CharacterBody2D" parent="." groups=["Player"]]
 position = Vector2(429, 417)
 scale = Vector2(5, 5)
-collision_layer = 7
-collision_mask = 5
 script = ExtResource("1_kq4p8")
 speed = 200
 jumpHeight = 150
@@ -139,29 +138,31 @@ texture = ExtResource("3_rfrvd")
 position = Vector2(202, -1)
 texture = ExtResource("3_rfrvd")
 
-[node name="Icon4" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(316, -1)
-texture = ExtResource("3_rfrvd")
-
-[node name="Icon5" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(413, -1)
-texture = ExtResource("3_rfrvd")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-material = SubResource("CanvasItemMaterial_jrcb6")
-position = Vector2(206, 1)
+position = Vector2(102, 0)
 scale = Vector2(6, 6)
 shape = SubResource("RectangleShape2D_7ijj3")
-debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="Enemy" type="Area2D" parent="." groups=["Enemy"]]
+visible = false
+position = Vector2(639, 450)
+script = ExtResource("4_eo025")
+metadata/_edit_group_ = true
+
+[node name="Demon" type="Sprite2D" parent="Enemy"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_fcaet")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+position = Vector2(-6, 9)
+scale = Vector2(3, 3)
+shape = SubResource("CapsuleShape2D_m670h")
 
 [node name="Enemy2" type="RigidBody2D" parent="." groups=["Enemy"]]
 position = Vector2(532, 443)
-collision_layer = 2
-collision_mask = 7
-mass = 5.0
-max_contacts_reported = 1
+max_contacts_reported = 10
 contact_monitor = true
-lock_rotation = true
 script = ExtResource("6_lwdte")
 metadata/_edit_group_ = true
 
@@ -175,4 +176,5 @@ position = Vector2(-5, 2)
 scale = Vector2(3, 3)
 shape = SubResource("CapsuleShape2D_qbu8e")
 
+[connection signal="body_entered" from="Enemy" to="Enemy" method="_on_body_entered"]
 [connection signal="body_entered" from="Enemy2" to="Enemy2" method="_on_body_entered"]
