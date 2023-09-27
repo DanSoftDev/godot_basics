@@ -1,95 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://d3qh4hbtfjxkp"]
+[gd_scene load_steps=8 format=3 uid="uid://d3qh4hbtfjxkp"]
 
-[ext_resource type="Script" path="res://Assets/Scripts/CharacterBody2D.gd" id="1_kq4p8"]
-[ext_resource type="Texture2D" uid="uid://bd814433q08fv" path="res://Assets/Sprites/zarca sprite.png" id="2_cr78j"]
+[ext_resource type="PackedScene" uid="uid://bswocacgvoxkv" path="res://Assets/Prefabs/player.tscn" id="1_4c5jf"]
 [ext_resource type="Texture2D" uid="uid://b5mim7gvtlh73" path="res://Assets/Sprites/icon.svg" id="3_rfrvd"]
 [ext_resource type="Texture2D" uid="uid://bi55egfe4f87c" path="res://Assets/Sprites/demon.png" id="5_fcaet"]
 [ext_resource type="Script" path="res://Assets/Scripts/Enemy2.gd" id="6_lwdte"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ckic1"]
-atlas = ExtResource("2_cr78j")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ec81b"]
-atlas = ExtResource("2_cr78j")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gfrt3"]
-atlas = ExtResource("2_cr78j")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2xxcp"]
-atlas = ExtResource("2_cr78j")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gigor"]
-atlas = ExtResource("2_cr78j")
-region = Rect2(64, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3vouc"]
-atlas = ExtResource("2_cr78j")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mf1qs"]
-atlas = ExtResource("2_cr78j")
-region = Rect2(64, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_82v7v"]
-atlas = ExtResource("2_cr78j")
-region = Rect2(0, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_prf6x"]
-atlas = ExtResource("2_cr78j")
-region = Rect2(48, 16, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_vdxu0"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ckic1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ec81b")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gfrt3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2xxcp")
-}],
-"loop": true,
-"name": &"Idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gigor")
-}],
-"loop": true,
-"name": &"Jump",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3vouc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mf1qs")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_82v7v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_prf6x")
-}],
-"loop": true,
-"name": &"Run",
-"speed": 5.0
-}]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u3v3o"]
-radius = 4.6
-height = 16.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jrcb6"]
 blend_mode = 1
@@ -97,33 +11,13 @@ blend_mode = 1
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ijj3"]
 size = Vector2(89.3333, 20)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qbu8e"]
-radius = 11.3333
-height = 27.3333
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wghlq"]
+radius = 9.0
+height = 26.6667
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Player" type="CharacterBody2D" parent="." groups=["Player"]]
-position = Vector2(429, 417)
-scale = Vector2(5, 5)
-collision_layer = 7
-collision_mask = 5
-script = ExtResource("1_kq4p8")
-speed = 200
-jumpHeight = 150
-metadata/_edit_group_ = true
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
-sprite_frames = SubResource("SpriteFrames_vdxu0")
-animation = &"Jump"
-frame_progress = 0.273516
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-scale = Vector2(0.5, 0.5)
-zoom = Vector2(1.5, 1.5)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource("CapsuleShape2D_u3v3o")
+[node name="Player" parent="." instance=ExtResource("1_4c5jf")]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(432, 557)
@@ -154,25 +48,24 @@ scale = Vector2(6, 6)
 shape = SubResource("RectangleShape2D_7ijj3")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
-[node name="Enemy2" type="RigidBody2D" parent="." groups=["Enemy"]]
-position = Vector2(532, 443)
-collision_layer = 2
-collision_mask = 7
-mass = 5.0
+[node name="Enemy" type="RigidBody2D" parent="." groups=["Enemy"]]
+position = Vector2(639, 446)
+collision_layer = 3
+collision_mask = 3
 max_contacts_reported = 1
 contact_monitor = true
 lock_rotation = true
 script = ExtResource("6_lwdte")
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Enemy2"]
+[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_fcaet")
 flip_h = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy2"]
-position = Vector2(-5, 2)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+position = Vector2(3, 4)
 scale = Vector2(3, 3)
-shape = SubResource("CapsuleShape2D_qbu8e")
+shape = SubResource("CapsuleShape2D_wghlq")
 
-[connection signal="body_entered" from="Enemy2" to="Enemy2" method="_on_body_entered"]
+[connection signal="body_entered" from="Enemy" to="Enemy" method="_on_body_entered"]
