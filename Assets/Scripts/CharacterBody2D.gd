@@ -44,7 +44,7 @@ func _physics_process(delta):
 		onGround = true
 		
 	move_and_slide()
-	handlePush()
+	#handlePush()
 	
 	
 func handlePush():
@@ -52,6 +52,7 @@ func handlePush():
 		var c = get_slide_collision(id)
 		if c.get_collider() is RigidBody2D:
 			c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
+		
 
 	
 
