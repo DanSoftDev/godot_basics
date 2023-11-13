@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://cqqobq85bucwp"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/SpaceShip.gd" id="1_lkwyg"]
+[ext_resource type="Texture2D" uid="uid://otbfn6hs7kyw" path="res://Assets/Sprites/Mini Pixel Pack 3/Player ship/Player_ship (16 x 16).png" id="2_mcnuj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tr6ql"]
+radius = 9.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70qj4"]
+atlas = ExtResource("2_mcnuj")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rixkv"]
+atlas = ExtResource("2_mcnuj")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ccpes"]
+atlas = ExtResource("2_mcnuj")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_praaf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70qj4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rixkv")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ccpes")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}]
+
+[node name="SpaceShip" type="CharacterBody2D"]
+visible = false
+script = ExtResource("1_lkwyg")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tr6ql")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_praaf")
+animation = &"idle"
